@@ -1,12 +1,14 @@
 import type { DietType, DietRule, DietRuleParams, InventoryItem } from '../types';
 
+// Constants for category checks
+const NON_VEGAN_CATEGORIES = ['meat', 'dairy'];
+
 // Helper functions for rule evaluation
 const isHighProtein = (item: InventoryItem): boolean => item.proteinG >= 15;
 const isHighFat = (item: InventoryItem): boolean => item.fatG >= 10;
-const isVegetarian = (item: InventoryItem): boolean => 
-  !['meat'].includes(item.category);
+const isVegetarian = (item: InventoryItem): boolean => item.category !== 'meat';
 const isVegan = (item: InventoryItem): boolean => 
-  !['meat', 'dairy'].includes(item.category);
+  !NON_VEGAN_CATEGORIES.includes(item.category);
 const isLowGI = (item: InventoryItem): boolean => 
   item.glycemicIndex === undefined || item.glycemicIndex <= 55;
 const isHighFiber = (item: InventoryItem): boolean => item.fiberG >= 3;
