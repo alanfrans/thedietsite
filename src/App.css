@@ -902,3 +902,114 @@ body {
     padding-bottom: env(safe-area-inset-bottom);
   }
 }
+
+/* Pantry Selection Modal */
+.pantry-selection-modal {
+  max-height: 85vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.pantry-search {
+  margin-bottom: var(--spacing-md);
+}
+
+.pantry-search .search-input {
+  width: 100%;
+  padding: var(--spacing-sm) var(--spacing-md);
+  border: 2px solid var(--border-color);
+  border-radius: var(--radius);
+  font-size: 0.95rem;
+  transition: border-color 0.2s;
+}
+
+.pantry-search .search-input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+}
+
+.pantry-items-container {
+  flex: 1;
+  overflow-y: auto;
+  margin-bottom: var(--spacing-md);
+  max-height: 60vh;
+}
+
+.pantry-category-group {
+  margin-bottom: var(--spacing-lg);
+}
+
+.category-header {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin-bottom: var(--spacing-sm);
+  padding-bottom: var(--spacing-xs);
+  border-bottom: 2px solid var(--border-color);
+}
+
+.pantry-items-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+}
+
+.pantry-item {
+  background: var(--card-background);
+  border: 2px solid var(--border-color);
+  border-radius: var(--radius);
+  padding: var(--spacing-md);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.pantry-item:hover {
+  border-color: var(--primary-color);
+  background: rgba(76, 175, 80, 0.05);
+  transform: translateX(4px);
+}
+
+.pantry-item-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-sm);
+}
+
+.pantry-item-name {
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.pantry-item-quantity {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+
+.pantry-item-macros {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-xs);
+}
+
+.macro-pill {
+  background: var(--background-color);
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.empty-pantry-selection {
+  text-align: center;
+  padding: var(--spacing-xl);
+  color: var(--text-secondary);
+}
+
+.btn-log-what-i-ate {
+  margin-bottom: var(--spacing-md);
+}

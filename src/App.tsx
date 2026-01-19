@@ -10,6 +10,7 @@ import { SuggestionList } from './components/SuggestionCard';
 import { InventoryManager } from './components/InventoryManager';
 import { AIIngestion } from './components/AIIngestion';
 import { ConsumptionModal } from './components/ConsumptionModal';
+import { PantrySelectionModal } from './components/PantrySelectionModal';
 import { DailyProgress } from './components/DailyProgress';
 import type { InventoryItem, DietType, DietaryGoal } from './types';
 import { clearAllCookies } from './utils/cookies';
@@ -24,6 +25,7 @@ function App() {
   const [activeTab, setActiveTab] = useState<Tab>('home');
   const [selectedItem, setSelectedItem] = useState<InventoryItem | null>(null);
   const [showConsumptionModal, setShowConsumptionModal] = useState(false);
+  const [showPantrySelectionModal, setShowPantrySelectionModal] = useState(false);
 
   // Compute suggestions directly (memoized pattern)
   const todayHistory = getTodayHistory();
@@ -36,6 +38,12 @@ function App() {
   };
 
   const handleItemSelect = (item: InventoryItem) => {
+    setSelectedItem(item);
+    setShowConsumptionModal(true);
+  };
+
+  const handlePantryItemSelect = (item: InventoryItem) => {
+    setShowPantrySelectionModal(false);
     setSelectedItem(item);
     setShowConsumptionModal(true);
   };
@@ -121,6 +129,14 @@ function App() {
               disabled={suggestions.length === 0}
             >
               🍽️ What Can I Eat Right Now?
+            </button>
+
+            <button
+              className="btn btn-secondary btn-large btn-log-what-i-ate"
+              onClick={() => setShowPantrySelectionModal(true)}
+              disabled={inventory.length === 0}
+            >
+              📝 Log What I Ate
             </button>
 
             <DailyProgress 
@@ -241,6 +257,15 @@ function App() {
             setShowConsumptionModal(false);
             setSelectedItem(null);
           }}
+        />
+      )}
+
+      {/* Pantry Selection Modal */}
+      {showPantrySelectionModal && (
+        <PantrySelectionModal
+          inventory={inventory}
+          onSelect={handlePantryItemSelect}
+          onCancel={() => setShowPantrySelectionModal(false)}
         />
       )}
     </div>

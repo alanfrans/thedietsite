@@ -145,6 +145,43 @@ describe('Meal Suggestions Engine', () => {
       expect(suggestions.find(s => s.item.itemName === 'Empty Item')).toBeUndefined();
     });
 
+    it('should filter out condiments from suggestions', () => {
+      const items: InventoryItem[] = [
+        ...createTestItems(),
+        {
+          id: 'condiment-1',
+          itemName: 'Ketchup',
+          quantity: 1,
+          unit: 'bottle',
+          category: 'condiments',
+          fiberG: 0,
+          fatG: 0,
+          carbsG: 5,
+          proteinG: 0,
+          lastUpdated: new Date().toISOString()
+        },
+        {
+          id: 'condiment-2',
+          itemName: 'Mustard',
+          quantity: 2,
+          unit: 'bottle',
+          category: 'condiments',
+          fiberG: 0,
+          fatG: 0,
+          carbsG: 1,
+          proteinG: 0,
+          lastUpdated: new Date().toISOString()
+        }
+      ];
+      const profile = createTestProfile();
+      
+      const suggestions = generateSuggestions(items, profile, []);
+      
+      expect(suggestions.find(s => s.item.category === 'condiments')).toBeUndefined();
+      expect(suggestions.find(s => s.item.itemName === 'Ketchup')).toBeUndefined();
+      expect(suggestions.find(s => s.item.itemName === 'Mustard')).toBeUndefined();
+    });
+
     it('should prioritize low-GI foods for glucose-stability goal', () => {
       const items = createTestItems();
       const profile = createTestProfile('low-glycemic');
