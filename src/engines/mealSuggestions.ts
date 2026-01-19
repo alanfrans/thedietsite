@@ -111,6 +111,9 @@ export function generateSuggestions(
   for (const item of inventory) {
     // Skip items with no quantity
     if (item.quantity !== 'unknown' && item.quantity <= 0) continue;
+    
+    // Skip condiments from suggestions
+    if (item.category === 'condiments') continue;
 
     const { score, reasons, warnings } = calculateSuggestionScore(
       item,
